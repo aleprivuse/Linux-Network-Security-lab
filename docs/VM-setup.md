@@ -38,3 +38,13 @@ I installed the VM whit a corrupted Ubuntu Linux file
 ### Solution:
 
 Deleted the old VM and created a new one whit a new installed Ubuntu file
+
+### Problems = Cannot do update and upgrade
+
+The vm has still the old time so i needed find a way to fix it.
+
+### Solution 
+
+I had to set the time manually whit this command `sudo date -s "(put you date)"`
+
+Then check angain whit `date` if you changed it 
