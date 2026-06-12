@@ -27,6 +27,10 @@ Here are gonna be the step to how secure your VM
 
 First make sure you make all of the update for you VM you can use i script or just putting this command manually every time `sudo apt update && sudo apt upgrade -y `
 
+### Step 2
+
+Make sure to enable you Port SSH (22) before the firewall or you might get locked out of your own machine first run this command `sudo ufw allow 22` then `sudo ufw enable` 
+
 ## VM Connection whit another VM
 
 ## Problems
