@@ -17,6 +17,8 @@ My VM is using another Keyboard so im going to fix it whit this command
 sudo dpkg-reconfigure keyboard-configuration
 ```
 
+then you are gonna go to the interface and select your keyboard.
+
 After that make sure to do `sudo reboot` to use the new keyboard
 ## VM Hardening
 
