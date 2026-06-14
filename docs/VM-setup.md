@@ -78,6 +78,20 @@ Then verify with:
 ```bash
 date
 ```
+**Solution:** Or let it syncd automatically : 
+
+```bash
+sudo apt install systemd-timesyncd
+```
+then run it whit this:
+```bash
+sudo timedatectl set-ntp true
+```
+Check if it synchronized whit this :
+
+```bash
+timedatectl
+```
 
 ---
 
