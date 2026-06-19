@@ -44,4 +44,5 @@ my ~ doesnt work so im going to type long command = ´pwd´ to check where we ar
 - and then run `sudo sshd -t`
   PasswordAuthentication no = its let you disisabilitate so that you can login whit an password so now the attacker cannot brutto force the way in
   `sudo sshd -t` = its checks for erros in the ssh configuration
-  - now if you want to see if evering thing is valid you can try to login but you need to use special command this `ssh -o PubkeyAuthentication=no username@ip server` so it test it whitout using the keys  
+  - now if you want to see if evering thing is valid you can try to login but you need to use special command this `ssh -o PubkeyAuthentication=no username@ip server` so it test it whitout using the keys
+  - to see if worked out you shoud see this : Permission denied (publickey)
