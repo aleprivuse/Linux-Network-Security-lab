@@ -24,10 +24,10 @@ This project is still a work in progress, and I will document my progress, mista
 ---
 
 ## Progress
-- [ ] Create and configure the server VM
-- [ ] Connect both VMs in a private network
-- [ ] Configure SSH communication
-- [ ] Set up and test the firewall
+- [X] Create and configure the server VM
+- [X] Connect both VMs in a private network
+- [X] Configure SSH communication
+- [X] Set up and test the firewall
 - [ ] Create users and manage permissions
-- [ ] Analyze logs and document findings
+- [X] Analyze logs and document findings
 - [ ] Add screenshots and documentation
