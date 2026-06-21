@@ -1,48 +1,142 @@
- # SSH hardening 
+# SSH Hardening
 
-Ps: Finish the folder VM-setup and ssh-pentest before going into this 
+> **Prerequisite:** Finish the VM Setup and SSH Pentest labs before continuing.
 
-## Hardening
+## SSH Keys
 
+SSH keys allow you to log in without using a password. Instead of typing a password every time, you use a public/private key pair.
 
-### SSH Keys
+### Generate a Key Pair
 
+```bash
+ssh-keygen
+```
 
-### SSH disable Root login 
+> I am not using a passphrase for this lab, but for better security you should use one. A passphrase acts like a password for your private key.
 
+Check your keys:
+
+```bash
+ls ~/.ssh
+```
+
+Copy the public key to the Sub VM:
+
+```bash
+ssh-copy-id username@SUB_IP
+```
+
+Try logging in again. You should now be able to log in without entering a password.
+
+---
+
+## Disable Root Login
+
+Open the SSH configuration:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Add or modify:
+
+```text
+PermitRootLogin no
+```
+
+Check for errors:
+
+```bash
+sudo sshd -t
+```
+
+### Why?
+
+Disabling root login prevents attackers from directly targeting the root account.
+
+Without this setting, an attacker could try:
+
+```bash
+ssh root@SERVER_IP
+```
+
+---
+
+## Disable Password Authentication
+
+In the same file:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Add or modify:
+
+```text
+PasswordAuthentication no
+```
+
+Validate the configuration:
+
+```bash
+sudo sshd -t
+```
+
+### Why?
+
+This disables password-based logins and forces users to authenticate with SSH keys.
+
+To test it:
+
+```bash
+ssh -o PubkeyAuthentication=no username@SERVER_IP
+```
+
+Expected result:
+
+```text
+Permission denied (publickey)
+```
+
+---
+
+## Result
+
+* SSH key authentication enabled
+* Root login disabled
+* Password authentication disabled
+* Brute-force attacks significantly harder
+
+---
+
+## What I Learned
+
+* How SSH key authentication works
+* How to generate SSH keys
+* How to copy SSH keys to another server
+* How to disable root login
+* How to disable password authentication
+* How to validate SSH configuration files with `sshd -t`
+* Why SSH keys are more secure than passwords
+
+---
 
 ## Problems
-### problems 
 
-my ~ doesnt work so im going to type long command = ´pwd´ to check where we are then in my case is `ls /home/you usernama/.ssh`
+### Problem
 
+My `~` shortcut was not working.
 
+### Solution
 
+Check where you are:
 
+```bash
+pwd
+```
 
-## Notes for myself 
+Then manually locate the SSH directory:
 
-**ssh keygen**
-- login Main Vm to sub whit ssh
-- create a ssh key whit this `ssh-keygen` (not gonna use passphrase but if more secure do it passphrase = password for private key)
-- the find your you ssh keys whit this `ls ~/.ssh`
-- then do the same to both of the VMS
-- then copy your ssh key to the sub VM whi this `ssh-copy-id username@SUB_IP`
-- then try to login you should be able to not use password
----
-**disabilitate root login and passowrd**
-
-- first use this `sudo nano /etc/ssh/sshd_config`
-- then write inside `PermitRootLogin no`
-- then use this command `sudo sshd -t`(search what it does)
-- then try to login whit my Main Vm
-  Root login = Disable the root login on the machine to ist harder to to brutto force it if the root is active its just `ssh root@server Ip`
-
-  ---
-  
-- For the disabilitation of Passowrd its in the same place and command is `PasswordAuthentication no`
-- and then run `sudo sshd -t`
-  PasswordAuthentication no = its let you disisabilitate so that you can login whit an password so now the attacker cannot brutto force the way in
-  `sudo sshd -t` = its checks for erros in the ssh configuration
-  - now if you want to see if evering thing is valid you can try to login but you need to use special command this `ssh -o PubkeyAuthentication=no username@ip server` so it test it whitout using the keys
-  - to see if worked out you shoud see this : Permission denied (publickey)
+```bash
+ls /home/your_username/.ssh
+```
